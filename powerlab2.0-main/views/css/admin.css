@@ -1,0 +1,142 @@
+/* =========================================================
+   PowerLab · Panel del administrador
+   (usa las variables de deportista.css y los componentes de ejercicios.css)
+   ========================================================= */
+
+/* Filas del listado (ejercicios y catálogos) */
+.pl-admin-fila {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--pl-borde);
+  transition: background var(--pl-transicion);
+}
+.pl-admin-fila:last-child { border-bottom: 0; }
+.pl-admin-fila:hover { background: #fafafb; }
+.pl-admin-fila.is-inactivo .pl-admin-fila__miniatura,
+.pl-admin-fila.is-inactivo .pl-admin-fila__nombre { opacity: 0.5; }
+
+.pl-admin-fila__miniatura {
+  flex-shrink: 0;
+  width: 112px;
+  border-radius: var(--pl-radio-sm);
+}
+.pl-admin-fila__miniatura .pl-ej-visual__icono { font-size: 1.5rem; }
+.pl-admin-fila__miniatura .pl-ej-visual__video { display: none; }
+.pl-admin-fila__miniatura--chica { width: 64px; aspect-ratio: 1; }
+.pl-admin-fila__miniatura--chica .pl-ej-visual__icono { font-size: 1.3rem; }
+
+.pl-admin-fila__info { flex: 1; min-width: 0; }
+.pl-admin-fila__nombre { font-weight: 700; color: var(--pl-tinta); text-decoration: none; }
+a.pl-admin-fila__nombre:hover { color: var(--pl-primario); }
+.pl-admin-fila__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.9rem;
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
+  color: var(--pl-texto-suave);
+}
+.pl-admin-fila__acciones { display: flex; gap: 0.4rem; flex-shrink: 0; }
+
+@media (max-width: 575.98px) {
+  .pl-admin-fila { flex-wrap: wrap; gap: 0.75rem; }
+  .pl-admin-fila__miniatura { width: 84px; }
+  .pl-admin-fila__info { flex-basis: calc(100% - 100px); }
+  .pl-admin-fila__acciones { width: 100%; justify-content: flex-end; }
+}
+
+/* Paginación */
+.pl-paginacion .page-link {
+  border-radius: var(--pl-radio-sm) !important;
+  margin: 0 0.15rem;
+  border-color: var(--pl-borde);
+  color: var(--pl-texto);
+  font-weight: 600;
+  min-width: 2.4rem;
+  text-align: center;
+}
+.pl-paginacion .page-item.active .page-link { background: var(--pl-primario); border-color: var(--pl-primario); color: #fff; }
+.pl-paginacion .page-link:focus { box-shadow: 0 0 0 0.2rem rgba(var(--pl-primario-rgb), 0.2); }
+
+/* Formulario */
+.pl-form-titulo { font-size: 1rem; font-weight: 700; margin-bottom: 1rem; }
+
+.pl-admin-imagen { display: flex; gap: 1rem; align-items: flex-start; flex-wrap: wrap; }
+.pl-admin-imagen__actual {
+  flex-shrink: 0;
+  width: 200px;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--pl-radio-sm);
+  border: 1px dashed var(--pl-borde);
+  background: var(--pl-fondo);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0.25rem;
+}
+.pl-admin-imagen__actual img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 575.98px) {
+  .pl-admin-imagen__actual { width: 100%; }
+}
+
+/* Miniatura de equipamiento (sin color de grupo) */
+.pl-equipo-miniatura { background: var(--pl-fondo); color: var(--pl-texto-suave); }
+
+/* Vista previa fija al hacer scroll */
+.pl-admin-previa { position: sticky; top: 1.5rem; }
+.pl-admin-previa__tarjeta { max-width: 300px; }
+@media (max-width: 991.98px) {
+  .pl-admin-previa { position: static; }
+  .pl-admin-previa__tarjeta { max-width: 260px; }
+}
+
+/* Barra de acciones fija en móvil */
+@media (max-width: 991.98px) {
+  .pl-admin-acciones {
+    position: sticky;
+    bottom: calc(var(--pl-tabbar-alto) + 0.5rem);
+    z-index: 5;
+    background: rgba(244, 245, 248, 0.94);
+    backdrop-filter: blur(8px);
+    padding: 0.5rem 0;
+  }
+}
+
+/* Selector de color (tono) */
+.pl-tonos { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.pl-tono-opcion {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--tono);
+  cursor: pointer;
+  border: 3px solid var(--pl-superficie);
+  box-shadow: 0 0 0 1px var(--pl-borde);
+  transition: transform var(--pl-transicion), box-shadow var(--pl-transicion);
+}
+.pl-tono-opcion:hover { transform: scale(1.1); }
+.btn-check:checked + .pl-tono-opcion { box-shadow: 0 0 0 3px var(--tono); }
+.btn-check:focus-visible + .pl-tono-opcion { outline: 3px solid rgba(var(--pl-primario-rgb), 0.45); outline-offset: 3px; }
+
+/* Selector de ícono */
+.pl-iconos { display: grid; grid-template-columns: repeat(auto-fill, minmax(40px, 1fr)); gap: 0.4rem; }
+.pl-icono-opcion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  border-radius: var(--pl-radio-sm);
+  border: 1px solid var(--pl-borde);
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: var(--pl-texto-suave);
+  transition: all var(--pl-transicion);
+}
+.pl-icono-opcion:hover { border-color: var(--pl-primario); color: var(--pl-primario); }
+.btn-check:checked + .pl-icono-opcion { background: var(--pl-primario); border-color: var(--pl-primario); color: #fff; }
+.btn-check:focus-visible + .pl-icono-opcion { outline: 3px solid rgba(var(--pl-primario-rgb), 0.45); outline-offset: 2px; }

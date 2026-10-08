@@ -1,0 +1,93 @@
+/* =========================================================
+   PowerLab · Sesión del Modo entrenamiento
+   ========================================================= */
+
+.pl-entreno { max-width: 1100px; margin: 0 auto; }
+
+/* Barra superior: salir · rutina + reloj · terminar */
+.pl-entreno__barra { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.75rem; }
+.pl-entreno__rutina { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--pl-texto-suave); }
+.pl-entreno__reloj { font-family: var(--pl-fuente-display); font-size: 1.5rem; color: var(--pl-tinta); line-height: 1.1; font-variant-numeric: tabular-nums; }
+
+.pl-entreno__progreso { height: 8px; background: var(--pl-superficie); border: 1px solid var(--pl-borde); }
+.pl-entreno__progreso .progress-bar { background: linear-gradient(90deg, var(--pl-primario), var(--pl-acento)); transition: width 0.4s ease; }
+.pl-entreno__progreso-texto { font-size: 0.8rem; font-weight: 600; color: var(--pl-texto-suave); text-align: center; margin: 0.4rem 0 1.25rem; }
+
+.pl-entreno__pantalla { animation: pl-pantalla 0.3s ease both; }
+@keyframes pl-pantalla { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* Ejercicio actual */
+.pl-entreno__nombre { font-size: clamp(1.5rem, 4vw, 2.1rem); margin: 0.5rem 0 0.25rem; line-height: 1.15; }
+.pl-entreno__serie { font-family: var(--pl-fuente-display); font-size: 1.25rem; color: var(--pl-primario); text-transform: uppercase; letter-spacing: 0.03em; }
+.pl-entreno__objetivo { font-weight: 700; color: var(--pl-tinta); margin-top: 0.15rem; }
+.pl-entreno__ultima { font-size: 0.82rem; color: var(--pl-texto-suave); margin-top: 0.25rem; }
+.pl-entreno__nota { font-size: 0.85rem; background: var(--pl-alerta-suave); color: #78350f; border-radius: var(--pl-radio-sm); padding: 0.45rem 0.7rem; margin-top: 0.6rem; }
+.pl-entreno__registro { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 1.25rem; }
+.pl-entreno__siguiente { font-size: 0.85rem; font-weight: 600; color: var(--pl-texto-suave); text-align: center; margin-top: 0.85rem; }
+.pl-entreno__tecnica { margin-top: 0.75rem; background: var(--pl-superficie); border: 1px solid var(--pl-borde); border-radius: var(--pl-radio); padding: 0.75rem 1rem; }
+.pl-entreno__tecnica summary { font-weight: 700; cursor: pointer; }
+.pl-entreno__tecnica ol { margin: 0.6rem 0 0; padding-left: 1.2rem; display: grid; gap: 0.35rem; font-size: 0.9rem; }
+
+/* Selector numérico grande (− valor +) */
+.pl-stepper .form-label { font-size: 0.78rem; }
+.pl-stepper__control { display: flex; align-items: stretch; gap: 0.35rem; }
+.pl-stepper__control .btn { width: 48px; font-size: 1.1rem; flex-shrink: 0; }
+.pl-stepper__control .form-control {
+  text-align: center;
+  font-family: var(--pl-fuente-display);
+  font-size: 1.6rem;
+  padding: 0.3rem;
+  min-width: 0;
+  -moz-appearance: textfield;
+}
+.pl-stepper__control .form-control::-webkit-outer-spin-button,
+.pl-stepper__control .form-control::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* Cronómetro de series por tiempo */
+.pl-cronometro { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.4rem; background: var(--pl-superficie); border: 1px solid var(--pl-borde); border-radius: var(--pl-radio); padding: 0.6rem; }
+.pl-cronometro__tiempo { font-family: var(--pl-fuente-display); font-size: 2.2rem; line-height: 1; color: var(--pl-tinta); font-variant-numeric: tabular-nums; }
+.pl-cronometro__tiempo.is-corriendo { color: var(--pl-primario); }
+
+@media (max-width: 575.98px) {
+  .pl-entreno__registro { grid-template-columns: 1fr; }
+  .pl-entreno .pl-ej-media .pl-ej-visual__icono { font-size: 4rem; }
+}
+
+/* Descanso: anillo con cuenta regresiva */
+.pl-descanso { text-align: center; padding: 1rem 0 2rem; }
+.pl-descanso__titulo { font-family: var(--pl-fuente-display); font-size: 1.4rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--pl-texto-suave); }
+.pl-descanso__anillo { position: relative; width: min(280px, 70vw); aspect-ratio: 1; margin: 1rem auto 1.5rem; }
+.pl-descanso__anillo svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.pl-descanso__fondo { fill: none; stroke: var(--pl-borde); stroke-width: 8; }
+.pl-descanso__avance { fill: none; stroke: var(--pl-primario); stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 0.25s linear; }
+.pl-descanso__tiempo { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--pl-fuente-display); font-size: clamp(3rem, 14vw, 4.5rem); color: var(--pl-tinta); font-variant-numeric: tabular-nums; }
+.pl-descanso__siguiente { font-weight: 600; color: var(--pl-texto); max-width: 30rem; margin: 0 auto; }
+
+/* Fin */
+.pl-entreno__fin { text-align: center; padding: 1rem 0 2rem; }
+.pl-entreno__fin .pl-vacio__icono { margin: 0 auto 1rem; }
+.pl-entreno__fin-titulo { font-family: var(--pl-fuente-display); text-transform: uppercase; font-size: clamp(1.6rem, 5vw, 2.4rem); }
+
+/* Recordatorio de hidratación */
+.pl-hidratacion {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--pl-tabbar-alto) + 1rem);
+  transform: translateX(-50%);
+  z-index: 1080;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: min(420px, calc(100% - 2rem));
+  padding: 0.85rem 1rem;
+  border-radius: var(--pl-radio);
+  background: var(--pl-info);
+  color: #fff;
+  box-shadow: var(--pl-sombra-lg);
+  animation: pl-pantalla 0.3s ease both;
+}
+.pl-hidratacion > i { font-size: 1.5rem; }
+.pl-hidratacion > div { flex: 1; font-size: 0.9rem; }
+@media (min-width: 992px) {
+  .pl-hidratacion { bottom: 1.5rem; }
+}

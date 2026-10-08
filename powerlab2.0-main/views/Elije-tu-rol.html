@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#15171c">
+  <title>Elige tu camino · PowerLab</title>
+  <link rel="icon" href="../imagenes/logopower.png" type="image/png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="../views/css/deportista.css" rel="stylesheet">
+  <link href="../views/css/publico.css" rel="stylesheet">
+</head>
+<body class="pl-publico">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg pub-nav">
+    <div class="container">
+      <a class="navbar-brand" href="index.html"><img src="../imagenes/logopower.png" alt="PowerLab"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPublico" aria-controls="menuPublico" aria-expanded="false" aria-label="Abrir menú">
+        <i class="bi bi-list"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="menuPublico">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html#servicios">Servicios</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#promociones">Promociones</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#ayuda">Ayuda</a></li>
+        </ul>
+        <div class="d-flex gap-2 align-items-center pub-nav__acciones">
+          <a href="index.html" class="btn btn-light border px-3"><i class="bi bi-arrow-left me-1"></i>Inicio</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pub-camino">
+    <div class="container">
+      <div class="pub-encabezado mb-4 mb-md-5 pl-reveal">
+        <span class="pub-encabezado__kicker">Bienvenido a PowerLab</span>
+        <h1 class="h2">Elige tu camino</h1>
+        <p>Tus rutinas, tu entrenamiento y tu progreso en un solo lugar.</p>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+        <div class="col-md-6 col-lg-5 pl-reveal">
+          <a href="registro.php" class="pub-opcion pub-opcion--destacada">
+            <span class="pl-acceso__icono"><i class="bi bi-person-plus-fill"></i></span>
+            <h2>Registrarme</h2>
+            <p class="mb-0">Accede a rutinas personalizadas, nutrición y seguimiento.</p>
+            <ul>
+              <li><i class="bi bi-check2-circle"></i>Arma tus propias rutinas</li>
+              <li><i class="bi bi-check2-circle"></i>Primer mes sin cláusulas</li>
+              <li><i class="bi bi-check2-circle"></i>Listo en menos de un minuto</li>
+            </ul>
+            <span class="pub-opcion__accion">¡Unirme a la comunidad! <i class="bi bi-arrow-right pub-opcion__flecha"></i></span>
+          </a>
+        </div>
+
+        <div class="col-md-6 col-lg-5 pl-reveal">
+          <a href="inicio-de-sesion.php" class="pub-opcion">
+            <span class="pl-acceso__icono"><i class="bi bi-box-arrow-in-right"></i></span>
+            <h2>Iniciar sesión</h2>
+            <p class="text-body-secondary mb-0">¿Ya eres parte de PowerLab? Entra a tu panel.</p>
+            <ul>
+              <li><i class="bi bi-check2-circle"></i>Tus rutinas y tus medidas</li>
+              <li><i class="bi bi-check2-circle"></i>Tu progreso guardado</li>
+              <li><i class="bi bi-check2-circle"></i>Desde cualquier dispositivo</li>
+            </ul>
+            <span class="pub-opcion__accion">¡Ya soy parte! <i class="bi bi-arrow-right pub-opcion__flecha"></i></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="pub-footer py-4">
+    <div class="container text-center">© <span data-pub-anio>2025</span> PowerLab. Todos los derechos reservados.</div>
+  </footer>
+
+  <div class="pl-toasts" id="plToasts" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../views/js/deportista.js"></script>
+  <script src="../views/js/publico.js"></script>
+</body>
+</html>

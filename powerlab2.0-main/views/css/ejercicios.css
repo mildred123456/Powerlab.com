@@ -1,0 +1,209 @@
+/* =========================================================
+   PowerLab · Biblioteca de ejercicios (deportista y vista previa del administrador)
+   ========================================================= */
+
+/* Tonos de grupo muscular (el número se guarda en grupos_musculares.tono) */
+.pl-tono-1 { --tono: #c92a2a; --tono-suave: #fff0f0; --tono-texto: #a51d1d; }
+.pl-tono-2 { --tono: #1971c2; --tono-suave: #e7f1fc; --tono-texto: #135ba0; }
+.pl-tono-3 { --tono: #2b8a3e; --tono-suave: #e9f7ec; --tono-texto: #22713a; }
+.pl-tono-4 { --tono: #c2255c; --tono-suave: #fdebf2; --tono-texto: #a01d4b; }
+.pl-tono-5 { --tono: #6741d9; --tono-suave: #f0ecfd; --tono-texto: #5232b8; }
+.pl-tono-6 { --tono: #0b7285; --tono-suave: #e3f4f7; --tono-texto: #095e6e; }
+.pl-tono-7 { --tono: #5c940d; --tono-suave: #f0f7e3; --tono-texto: #4b7a0b; }
+.pl-tono-8 { --tono: #e67700; --tono-suave: #fff3e0; --tono-texto: #a85600; }
+.pl-tono-9 { --tono: #862e9c; --tono-suave: #f6e9f9; --tono-texto: #6f2482; }
+
+/* Etiqueta de grupo */
+.pl-grupo {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: var(--tono-suave, var(--pl-primario-suave));
+  color: var(--tono-texto, var(--pl-primario));
+}
+
+/* Chips de grupo con su color al estar activos */
+.pl-chip--tono.active { background: var(--tono); border-color: var(--tono); color: #fff; }
+
+/* Barra de filtros fija bajo la topbar mientras se hace scroll */
+.pl-ej-filtros {
+  position: sticky;
+  top: var(--pl-topbar-alto);
+  z-index: 1020;
+  background: rgba(244, 245, 248, 0.94);
+  backdrop-filter: blur(10px);
+  margin: 0 -1rem 1.25rem;
+  padding: 0.75rem 1rem;
+}
+@media (min-width: 992px) {
+  .pl-ej-filtros { top: 0; margin: 0 -2rem 1.5rem; padding: 1rem 2rem; }
+}
+
+/* Tarjeta uniforme */
+.pl-ej-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--pl-superficie);
+  border: 1px solid var(--pl-borde);
+  border-radius: var(--pl-radio);
+  overflow: hidden;
+  color: var(--pl-texto);
+  text-decoration: none;
+  box-shadow: var(--pl-sombra-sm);
+  transition: transform var(--pl-transicion), box-shadow var(--pl-transicion), border-color var(--pl-transicion);
+}
+a.pl-ej-card:hover { transform: translateY(-4px); box-shadow: var(--pl-sombra); border-color: rgba(var(--pl-primario-rgb), 0.4); color: var(--pl-texto); }
+a.pl-ej-card:hover .pl-ej-visual__img { transform: scale(1.05); }
+a.pl-ej-card:hover .pl-ej-visual__icono { transform: scale(1.12) rotate(-6deg); }
+
+.pl-ej-card__cuerpo { display: flex; flex-direction: column; gap: 0.4rem; padding: 0.9rem; flex: 1; }
+.pl-ej-card__nombre {
+  font-size: 0.98rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.5em; /* misma altura aunque el nombre ocupe una línea */
+}
+.pl-ej-card__musculo { font-size: 0.8rem; color: var(--pl-texto-suave); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pl-ej-card__chips { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: auto; padding-top: 0.4rem; }
+
+@media (max-width: 575.98px) {
+  .pl-ej-card__cuerpo { padding: 0.75rem; }
+  .pl-ej-card__nombre { font-size: 0.9rem; }
+  .pl-ej-card__equipo { display: none !important; } /* en móvil solo el nivel para no saturar */
+}
+
+/* Visual: imagen recortada a la misma proporción, o ícono sobre el color del grupo */
+.pl-ej-visual {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background:
+    radial-gradient(circle at 78% 18%, color-mix(in srgb, var(--tono, var(--pl-primario)) 70%, transparent), transparent 62%),
+    linear-gradient(135deg, var(--pl-tinta) 0%, var(--pl-tinta-2) 100%);
+}
+.pl-ej-visual__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #fff; transition: transform 0.4s ease; }
+.pl-ej-visual__icono { font-size: 2.4rem; opacity: 0.92; transition: transform var(--pl-transicion); }
+.pl-ej-visual__video {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+}
+
+/* Visual grande del detalle */
+.pl-ej-media { border-radius: var(--pl-radio-lg); box-shadow: var(--pl-sombra); }
+.pl-ej-media .pl-ej-visual__icono { font-size: 6rem; animation: pl-flotar 3.5s ease-in-out infinite; }
+.pl-ej-video { border-radius: var(--pl-radio); overflow: hidden; box-shadow: var(--pl-sombra-sm); }
+.pl-ej-video iframe { border: 0; }
+
+/* Nivel (siempre con texto; el color es apoyo) */
+.pl-nivel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--pl-radio-sm);
+  background: var(--pl-fondo);
+  color: var(--pl-texto-suave);
+}
+.pl-nivel::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.pl-nivel--principiante { background: var(--pl-exito-suave); color: #15803d; }
+.pl-nivel--intermedio { background: var(--pl-alerta-suave); color: #b45309; }
+.pl-nivel--avanzado { background: var(--pl-peligro-suave); color: #b91c1c; }
+
+.pl-etiqueta--neutra { background: var(--pl-fondo); color: var(--pl-texto-suave); }
+
+/* Carga */
+.pl-ej-cargando { text-align: center; color: var(--pl-texto-suave); font-weight: 600; font-size: 0.9rem; padding: 1.5rem 0 0; }
+[data-ej-lista][aria-busy="true"] { opacity: 0.55; transition: opacity 0.2s ease; }
+[data-ej-centinela] { height: 1px; }
+.pl-ej-nueva { animation: pl-ej-aparecer 0.35s ease both; }
+@keyframes pl-ej-aparecer {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Detalle */
+.pl-volver {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--pl-texto-suave);
+  text-decoration: none;
+  margin-bottom: 1rem;
+  transition: color var(--pl-transicion), gap var(--pl-transicion);
+}
+.pl-volver:hover { color: var(--pl-primario); gap: 0.6rem; }
+
+.pl-ej-detalle__titulo { font-size: clamp(1.6rem, 4vw, 2.25rem); margin: 0.5rem 0 0.75rem; }
+.pl-ej-detalle__desc { color: var(--pl-texto-suave); font-size: 1.02rem; margin-bottom: 1.25rem; }
+
+.pl-ej-musculos { display: grid; gap: 1rem; }
+.pl-ej-musculos dt { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--pl-texto-suave); margin-bottom: 0.4rem; }
+.pl-ej-musculos dd { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0; }
+.pl-musculo {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: var(--pl-fondo);
+  border: 1px solid var(--pl-borde);
+}
+.pl-musculo--principal { background: var(--pl-primario-suave); border-color: rgba(var(--pl-primario-rgb), 0.35); color: #b4470b; }
+
+/* Pasos numerados */
+.pl-pasos { list-style: none; counter-reset: paso; padding: 0; margin: 0; display: grid; gap: 0.75rem; }
+.pl-pasos li {
+  counter-increment: paso;
+  position: relative;
+  padding: 1rem 1rem 1rem 3.75rem;
+  background: var(--pl-superficie);
+  border: 1px solid var(--pl-borde);
+  border-radius: var(--pl-radio);
+  box-shadow: var(--pl-sombra-sm);
+}
+.pl-pasos li::before {
+  content: counter(paso);
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--pl-fuente-display);
+  font-size: 1rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--pl-primario), var(--pl-acento));
+}
+@media (min-width: 992px) {
+  .pl-pasos { grid-template-columns: repeat(2, 1fr); }
+}
